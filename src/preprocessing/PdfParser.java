@@ -56,8 +56,10 @@ public class PdfParser {
         
  //       for(int i= 1 ; i<=reader.getNumberOfPages() ;i++)
         {
-        byte[] streamBytes = reader.getPageContent(77);
-        PRTokeniser tokenizer = new PRTokeniser(streamBytes);
+        // Pushkar - messing around with PRTokeniser // 
+        //byte[] streamBytes = reader.getPageContent(77);
+        
+        PRTokeniser tokenizer = new PRTokeniser(reader.getSafeFile());
         while (tokenizer.nextToken()) {
             if (tokenizer.getTokenType() == PRTokeniser.TokenType.STRING)
             {

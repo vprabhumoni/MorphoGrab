@@ -4,7 +4,8 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import org.apache.poi.hwpf.HWPFDocument;
+// Pushkar - Commenting this - Can't find it in latest package //
+//import org.apache.poi.hwpf.HWPFDocument;
 import preprocessing.PdfParser;
 
 /*
@@ -121,9 +122,10 @@ public class WordConverter extends javax.swing.JDialog {
             ///Get the no of pages in the pdf file
         
             FileInputStream f = new FileInputStream(FileName);
-            HWPFDocument docA = new HWPFDocument(f);
-	    String k= docA.getText().toString();
-      
+            // Pushkar - Commenting this - cant find this in the package I imported //
+            //HWPFDocument docA = new HWPFDocument(f);
+            //String k= docA.getText().toString();
+            String k = "";
             jTextArea1.setText(k);
             
         } catch (IOException ex) {

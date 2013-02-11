@@ -7,11 +7,15 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.*;
 import java.nio.charset.Charset;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import javax.swing.JFileChooser;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.DefaultHighlighter;
@@ -20,6 +24,11 @@ import javax.swing.text.JTextComponent;
 import learners.ReLearner;
 import learners.regexTemplate;
 import learners.Pairs;
+
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
 /*
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
@@ -30,7 +39,6 @@ import learners.Pairs;
  * @author prasad
  */
 public class SampleJForm extends javax.swing.JFrame {
-
     /**
      * Creates new form SampleJForm
      */
@@ -545,32 +553,55 @@ public class SampleJForm extends javax.swing.JFrame {
         }
         });
         pdf.show();
-        
-       
-        
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private NexusGen block;
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        // TODO add your handling code here:
-        
-        String[] parsedLines = null;
-        if(matrix != null)
-        	parsedLines = matrix.split("\\n");
-        
-        //characterAndStates ( Vector<Pairs> to be passed to MatrixBlock )
-        
-        Vector<String>  vectorOfLines=  new Vector<String>();
-        if(parsedLines != null )
-        	vectorOfLines.addAll(Arrays.asList(parsedLines));
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {
+		//GEN-FIRST:event_jButton4ActionPerformed
+    	String[] parsedLines = null;
+    	if(matrix != null)
+    		parsedLines = matrix.split("\\n");
 
-         block = new NexusGen(characterAndStates, vectorOfLines, "SAMPLE");
-         String tt = block.getNexusStr();
-         System.out.println(tt);
+    	//characterAndStates ( Vector<Pairs> to be passed to MatrixBlock )
+
+    	Vector<String>  vectorOfLines=  new Vector<String>();
+    	if(parsedLines != null )
+    		vectorOfLines.addAll(Arrays.asList(parsedLines));
+
+    	block = new NexusGen(characterAndStates, vectorOfLines, "SAMPLE");
+    	String tt = block.getNexusStr();    	
+
+    	FileDialog fileDlg = new FileDialog(this,"Open the file", FileDialog.SAVE);
+    	fileDlg.setFilenameFilter(new FilenameFilter() {
+			
+			@Override
+			public boolean accept(File dir, String name) {
+				if(name.endsWith(".nex"))
+					return true;
+				return false;
+			}
+		});
+    	
+    	fileDlg.show();
+    	
+    	String fileName = fileDlg.getDirectory() + "//" + fileDlg.getFile();
+    	
+    	Path path = Paths.get(fileName);
+    	
+    	try {
+			Files.write(path, Arrays.asList(tt), java.nio.charset.StandardCharsets.UTF_8);
+		} 
+    	catch (IOException e) {
+			e.printStackTrace();
+		}
+    	
+    	System.out.print(fileName);
+         
+    	System.out.println(tt);
          
          
          
-    }//GEN-LAST:event_jButton4ActionPerformed
+    }//GEN-LAST:event_jButton4LPerformed
  
     public void RemoveNoiseClicked()
     {

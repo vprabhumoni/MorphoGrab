@@ -64,11 +64,18 @@ public class NexusGen {
 		nexStr += "BEGIN TAXA;\n";
 
 		
-		nexStr += "\tDIMENSIONS NTAX=" + chars.size() +";\n";
+		//nexStr += "\tDIMENSIONS NTAX=" + chars.size() +";\n";
+		nexStr += "\tDIMENSIONS NTAX=" + chAndStates.size() +";\n";
 		nexStr += "\tTAXLABELS\n";
 		
+		/* ORIGINAL CODE
 		for(int i=0;i<chars.size();i++)
 			nexStr += "\t\t'" + chars.get(i) + "'\n";
+		*/
+		// My code to get Taxlabels - Vyankatesh
+		for(int i=0;i<chAndStates.size();i++) {
+			nexStr += "\t\t'" + chAndStates.get(i).character +"'\n";
+		}
 
 		nexStr += ";\n";
 		nexStr += "ENDBLOCK;\n\n\n\n";
