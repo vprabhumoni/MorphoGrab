@@ -1,8 +1,12 @@
 bin/*
-*.swp
-tags
+build/*
+nbproject/*
+dist/*
+#Test Examples#
+TestProjects/*
 SampleCharacterStateSpecifications/
 SampleProjectsWithNexusFiles/
-.classpath
 Dependencies/
-.classpath
+*.swp
+*.classpath
+*.jar
